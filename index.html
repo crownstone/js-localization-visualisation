@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/vis.css">
+    <script src="js/vis.js"></script>
+    <script src="js/colors.js"></script>
+    <script src="js/globals.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/viz.js"></script>
+</head>
+<body onload="init()">
+<canvas height="1200" width="1200" id="canvasContainer" style="float:left;" ></canvas>
+<div style="float:left">
+
+    calculation mode: <br>
+    <input type="radio" name="calcmode" value="toggleRSSI" onclick="toggleRSSI()" > RSSI<br>
+    <input type="radio" name="calcmode" value="toggleDistance" onclick="toggleDistance()" checked> Distance<br>
+
+    <br>
+    drawing mode:<br>
+    <input type="radio" name="mode" value="Probability" onclick="toggleProbability()" > Probability mode<br>
+    <input type="radio" name="mode" value="roomMode" onclick="toggleRooms()" checked> room mode<br>
+
+    <br>
+    Focus on room:<br>
+    <input type="radio" name="focusroom" id="kitchenButton" value="kitchen" > kitchen<br>
+    <input type="radio" name="focusroom" id="bathroomButton" value="bathroom"> bathroom<br>
+    <input type="radio" name="focusroom" id="garageButton" value="garage"> garage<br>
+    <input type="radio" name="focusroom" id="livingroomButton" value="livingroom" checked> living room<br>
+    <br/>
+    <br/>
+    Include in measurement packet:<br/>
+    <input type="checkbox" id="kitchenBox" checked="checked" onclick="toggleKitchen(this)" />kitchen<br/>
+    <input type="checkbox"  id="bathroomBox"  checked="checked"  onclick="toggleBathroom(this)" />bathroom<br/>
+    <input type="checkbox"  id="garageBox"  checked="checked"  onclick="toggleGarage(this)" />garage<br/>
+    <input type="checkbox"  id="livingroomBox"  checked="checked"  onclick="toggleLivingroom(this)" />living room<br/>
+    <br/><br/>
+    Crownstones present:<br/>
+    <input type="checkbox" id="kitchenBox2" checked="checked" onclick="toggleKitchenFingerprint(this)" />kitchen<br/>
+    <input type="checkbox"  id="bathroomBox2"  checked="checked"  onclick="toggleBathroomFingerprint(this)" />bathroom<br/>
+    <input type="checkbox"  id="garageBox2"  checked="checked"  onclick="toggleGarageFingerprint(this)" />garage<br/>
+    <input type="checkbox"  id="livingroomBox2"  checked="checked"  onclick="toggleLivingroomFingerprint(this)" />living room<br/>
+
+    <div style="display:none">
+        <br/> <br/>
+        Bathroom: <br/>
+        Noffset: <input type="range" min="-2" max="4" step="0.01" id="bathroomNRange" value="0"></input><span id="bathroomNspan"></span><br/>
+        Aoffset: <input type="range" min="-20" max="20" step="0.01" id="bathroomARange" value="0"></input><span id="bathroomAspan"></span><br/>
+
+        <br/> <br/>
+        Garage: <br/>
+        Noffset: <input type="range" min="-2" max="4" step="0.01" id="garageNRange"></input><span id="garageNspan"></span><br/>
+        Aoffset: <input type="range" min="-20" max="20" step="0.01" id="garageARange"></input><span id="garageAspan"></span><br/>
+
+        <br/> <br/>
+        Living room: <br/>
+        Noffset: <input type="range" min="-2" max="4" step="0.01" id="livingroomNRange"></input><span id="livingroomNspan"></span><br/>
+        Aoffset: <input type="range" min="-20" max="20" step="0.01" id="livingroomARange"></input><span id="livingroomAspan"></span><br/>
+
+        <br/> <br/>
+        Kitchen: <br/>
+        Noffset: <input type="range" min="-2" max="4" step="0.01" id="kitchenNRange"></input><span id="kitchenNspan"></span><br/>
+        Aoffset: <input type="range" min="-20" max="20" step="0.01" id="kitchenARange"></input><span id="kitchenAspan"></span><br/>
+    </div>
+    <br/> <br/>
+    cutoff: <br/>
+    1e: <input type="range" min="-5" max="0" step="0.01" id="cutoffRange"></input><span id="cutoffSpan"></span><br/>
+
+    <br/> <br/>
+    resolution: <br/>
+    1e: <input type="range" min="1" max="50" step="1" id="resolutionRange"></input><span id="resolutionSpan"></span><br/>
+    <input type="button" onclick="visInit3d()" value="update3dGraph" >
+    <div id="graph" style="width:800px;"></div>
+</div>
+<img src="./groundImage.png" id="background" style="display:none;"/>
+</body>
+</html>
